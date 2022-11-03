@@ -1,0 +1,216 @@
+---
+title: "Abigail Plot Investigations"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Plots
+
+### Plot (a)
+
+```{r ,echo = FALSE, message = FALSE, warning = FALSE, fig.width=5, fig.height=5,fig.align='center', eval = TRUE,results="asis"}
+
+beta=1
+theta=0.0001
+x <- seq(-0.2, 8, by=0.4 )
+
+f <- function(x, n = 100) {
+  l <- 1:n
+  if(x>0){
+  
+   sum((((beta*x)^(l-1))*(theta^l))/(factorial(l)*gamma(l)))*((beta*exp(-(beta*x)-theta))/(1-exp(-theta)))
+    
+  }else{
+    0
+  }
+}
+
+
+y <- sapply(x, f)
+
+plot(x, y, col = "blue", type = "l", ylab = "PDF")
+```
+
+
+### Plot (b)
+
+```{r ,echo = FALSE, message = FALSE, warning = FALSE, fig.width=5, fig.height=5,fig.align='center', eval = TRUE,results="asis"}
+
+beta=1
+theta=0.005
+x <- seq(-0.2, 10, by=0.4 )
+
+f <- function(x, n = 100) {
+  l <- 1:n
+  if(x>0){
+  
+   sum((((beta*x)^(l-1))*(theta^l))/(factorial(l)*gamma(l)))*((beta*exp(-(beta*x)-theta))/(1-exp(-theta)))
+    
+  }else{
+    0
+  }
+}
+
+
+y <- sapply(x, f)
+
+plot(x, y, col = "blue", type = "l", ylab = "PDF")
+```
+
+
+
+### Plot (c)
+
+```{r ,echo = FALSE, message = FALSE, warning = FALSE, fig.width=5, fig.height=5,fig.align='center', eval = TRUE,results="asis"}
+
+beta=1
+theta=1
+x <- seq(-0.2, 15, by=0.4 )
+
+f <- function(x, n = 100) {
+  l <- 1:n
+  if(x>0){
+  
+   sum((((beta*x)^(l-1))*(theta^l))/(factorial(l)*gamma(l)))*((beta*exp(-(beta*x)-theta))/(1-exp(-theta)))
+    
+  }else{
+    0
+  }
+}
+
+
+y <- sapply(x, f)
+
+plot(x, y, col = "blue", type = "l", ylab = "PDF")
+```
+
+
+### Plot (d)
+
+```{r ,echo = FALSE, message = FALSE, warning = FALSE, fig.width=5, fig.height=5,fig.align='center', eval = TRUE,results="asis"}
+
+beta=1
+theta=2
+x <- seq(-0.05, 15, by=0.5 )
+
+f <- function(x, n = 100) {
+  l <- 1:n
+  if(x>0){
+  
+   sum((((beta*x)^(l-1))*(theta^l))/(factorial(l)*gamma(l)))*((beta*exp(-(beta*x)-theta))/(1-exp(-theta)))
+    
+  }else{
+    0
+  }
+}
+
+
+y <- sapply(x, f)
+
+plot(x, y, col = "blue", type = "l", ylab = "PDF")
+```
+
+### Plot (e)
+
+```{r ,echo = FALSE, message = FALSE, warning = FALSE, fig.width=5, fig.height=5,fig.align='center', eval = TRUE,results="asis"}
+
+beta=1
+theta=5
+x <- seq(-0.2, 25, by=0.4 )
+
+f <- function(x, n = 100) {
+  l <- 1:n
+  if(x>0){
+  
+   sum((((beta*x)^(l-1))*(theta^l))/(factorial(l)*gamma(l)))*((beta*exp(-(beta*x)-theta))/(1-exp(-theta)))
+    
+  }else{
+    0
+  }
+}
+
+
+y <- sapply(x, f)
+
+plot(x, y, col = "blue", type = "l", ylab = "PDF")
+```
+
+### Plot (f)
+
+```{r ,echo = FALSE, message = FALSE, warning = FALSE, fig.width=5, fig.height=5,fig.align='center', eval = TRUE,results="asis"}
+
+beta=3
+theta=100
+x <- seq(-0.2, 60, by=0.4 )
+  
+f <- function(x, n = 78) {
+  l <- 1:n
+  if(x>0){
+  
+   sum((((beta*x)^(l-1))*(theta^l))/(factorial(l)*gamma(l)))*((beta*exp(-(beta*x)-theta))/(1-exp(-theta)))
+    
+  }else{
+    0
+  }
+}
+y <- sapply(x, f)
+plot(x, y, col = "blue", type = "l", ylab = "PDF")
+
+```
+
+### general graphing
+
+```{r ,echo = FALSE, message = FALSE, warning = FALSE, fig.width=5, fig.height=5,fig.align='center', eval = TRUE,results="asis"}
+
+beta=1
+theta=0.0001
+x <- seq(-0.2, 8, by=0.4 )
+
+f <- function(x, n = 100) {
+  l <- 1:n
+  if(x>0){
+  
+   sum((((beta*x)^(l-1))*(theta^l))/(factorial(l)*gamma(l)))*((beta*exp(-(beta*x)-theta))/(1-exp(-theta)))
+    
+  }else{
+    0
+  }
+}
+
+
+y <- sapply(x, f)
+
+plot(x, y, col = "blue", type = "l", ylab = "PDF")
+```
+
+
+```{r}
+#graph of skewness of x
+
+skew<- function(t){
+  g1=((t*exp(t)*(2*(exp(t) - 1) - t))^(-3/2)) * (t*exp(t)*(t*exp(t)*(t-6) + 6*(t+exp(2*t) - 2*exp(t) + 1) + t^2))
+  return(g1)
+}
+
+library(latex2exp)
+xx=seq(0,40,0.01)
+plot(xx, skew(xx), type = "l",  col="blue", xlab= TeX(r'($\theta$)'), ylab=TeX(r'($\gamma_1$)') )
+
+#correlation coefficient of (X,L*) use range(0,10)
+rho <- function(t){
+  r1= ( (exp(t) - t -1)/(2*exp(t) - t - 2) )^(1/2)
+  return(r1)
+}
+
+plot(xx, rho(xx), type="l", col="blue", ylab= TeX(r'($\rho(\theta)$)') , xlab = TeX(r'($\theta$)'))
+
+#all graphs on 1
+
+```
+
